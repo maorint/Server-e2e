@@ -1,0 +1,35 @@
+// Only keep the 10 most recent builds
+properties([[$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', numToKeepStr: '10']]])
+
+// https://jenkins.io/doc/pipeline/steps/
+node {
+
+    stage 'clean'
+      // start with an empty workspace
+      deleteDir()
+
+    stage 'checkout'
+      checkout scm
+
+    stage 'compile'
+      wrap([$class: 'TimestamperBuildWrapper']) {
+        sh './build.sh compile'
+      }
+      step([$class: 'WarningsPublisher', consoleParsers: [[parserName: 'Java Compiler (javac)']]])
+      gitlabCommitStatus { }
+
+    stage 'test'
+      wrap([$class: 'TimestamperBuildWrapper']) {
+        sh './build.sh test'
+      }
+      step([$class: 'JUnitResultArchiver', testResults: 'build/test-results/TEST-*.xml'])
+      // trigger sonarqube
+      zip archive: true, dir: 'build', glob: 'reports/**,test-results/**,classes/**', zipFile: 'test-results.zip'
+      build job: "${env.JOB_NAME}-sonarqube", wait: false
+
+    // stage 'dev deploy'
+    //   input message: "Do you want to deploy to environment?", ok: "Deploy!"
+    //   // depends on NOMAD_ADDR to select target environment
+    //   sh "./build.sh deploy"
+
+}
