@@ -14,6 +14,10 @@ Before("@UsingBrowser"){
 
 }
 
+//Before("@LoggedAsAnonymous") {
+//    restClient = mesClientFactory.organization(ORGANIZATION_NAME, ORGANIZATION_USER, ORGANIZATION_PASSWORD)
+//}
+
 After {
     blocks.each({
         MongoService.client().removeByInternalId(it.internalId)
@@ -21,5 +25,5 @@ After {
 }
 
 After("@UsingBrowser"){
-    intenduWeb.seleniumHelper.terminate()
+    //intenduWeb.seleniumHelper.terminate()
 }

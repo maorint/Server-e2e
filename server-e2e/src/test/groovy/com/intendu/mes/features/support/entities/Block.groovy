@@ -29,7 +29,7 @@ class Block {
     Boolean isTest = true
     static String randomSessionID = null
 
-    private static String[] blockTypes = ["MultiTaskingBlock"] //, "InhibitionCategoryBlock", "SpatialMemoryBlock", "ShoppingBlock", "DividedAttentionBlock"]
+    private static String[] blockTypes = ["SpatialMemoryResortBlock"] //, "InhibitionCategoryBlock", "SpatialMemoryBlock", "ShoppingBlock", "DividedAttentionBlock"]
 
     public static String[] getBlockTypes() { return blockTypes }
 

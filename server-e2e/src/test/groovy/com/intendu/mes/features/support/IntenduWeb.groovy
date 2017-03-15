@@ -4,6 +4,7 @@ class IntenduWeb {
     public static SeleniumHelper seleniumHelper
     public static final String LOGIN_PATH = "/#/login/"
     public static final String HOMELOGIN_PATH = "/#/homelogin/"
+    public static final String NEW_THERAPIST_PATH = "/#/admin/therapist/new"
 
     public static final String ORG_NAME_ID = "orgname";
     public static final String USER_NICKNAME_ID = "nickname"
@@ -25,6 +26,7 @@ class IntenduWeb {
         seleniumHelper.setTextFieldById(USER_NICKNAME_ID, nickname)
         seleniumHelper.setTextFieldById(USER_PASSWORD_ID, password)
         seleniumHelper.clickByXpath(LOGIN_BUTTON_XPATH)
+        seleniumHelper.waitForXpath("//div/h1[text()='Choose player']")
     }
     def homelogin(String email, String password) {
         seleniumHelper.gotoUrl(HOMELOGIN_PATH)
@@ -44,6 +46,26 @@ class IntenduWeb {
             print e.toString()
             return false
         }
+    }
+
+    def registerTherapist() {
+        seleniumHelper.gotoUrl(NEW_THERAPIST_PATH)
+        seleniumHelper.waitForXpath("//div[@ng-controller='CreateTherapistCtrl']")
+
+        SetTherapistEmail(getRandomMail())
+    }
+    def SetTherapistEmail(mailAddress) {
+        seleniumHelper.setTextFieldByXpath("//input[@ng-model='\$select.search']", mailAddress)
+        seleniumHelper.clickByXpath("//input[@ng-model='\$select.search']")
+        sleep(1000)
+        seleniumHelper.clickByXpath("//button[@ng-click='createNew()']")
+    }
+
+    def getRandomMail() {
+        String basic_mail_address = "maor+%s@intendu.com"
+        int randomDate = (int)(new Date().getTime() /1000F)%100000;
+        return sprintf(basic_mail_address, randomDate)
+
     }
 
 }

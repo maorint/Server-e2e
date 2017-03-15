@@ -44,12 +44,16 @@ class SeleniumHelper {
                 return
             sleep(500)
         }
-        throw new Exception("Failed to find element " + elemId)
+        throw new Exception("Failed to find xpath " + xpath)
     }
 
     def setTextFieldById(String fieldId, String content) {
         driver.findElement(By.id(fieldId)).sendKeys(content)
     }
+    def setTextFieldByXpath(String xpath, String content) {
+        driver.findElement(By.xpath(xpath)).sendKeys(content)
+    }
+
     def clickByXpath(String xpath) {
         driver.findElement(By.xpath(xpath)).click()
     }
@@ -73,6 +77,10 @@ class SeleniumHelper {
         driver.findElement(By.id(fieldId)).click()
     }
 
+    def selectItemById(String fieldId) {
+        //driver.findElement(By.xpath("//div[@id='" + fieldId + "' ]/input"))
+//        driver.findElement(By.id(fieldId)).selec
+    }
     def scrollToItem(String fieldId) {
         def element = driver.findElement(By.id(fieldId))
         Actions actions = new Actions(driver);

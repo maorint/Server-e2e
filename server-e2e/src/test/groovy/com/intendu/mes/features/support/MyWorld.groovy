@@ -6,17 +6,20 @@ import com.intendu.mes.features.support.entities.Block
 class MyWorld {
 
 
-    def mesDomain = System.getProperty('serverUrl', 'http://localhost:9000')
+    def mesDomain = System.getProperty('serverUrl', 'http://localhost:9001')
 
-    def ORGANIZATION_NAME = System.getProperty('serverUrl', "TestOrg")
-    def ORGANIZATION_USER = System.getProperty('serverUrl', "nickname")
-    def ORGANIZATION_PASSWORD = System.getProperty('serverUrl', "!123Abc")
-    def PLAYER_ID = "581ef90a8c2984890081773b"
+    def ORGANIZATION_NAME = System.getProperty('adminOrganization', "TestOrg")
+    def ORGANIZATION_USER = System.getProperty('adminUsername', "nickname")
+    def ORGANIZATION_PASSWORD = System.getProperty('adminPassword', "!123Abc")
+    def THERAPIST_ID = "581ef90a8c2984890081773b"
+    def PLAYER_ID = "58107eb08c29846d00577b2d"
 
-    def PLAYER_ORG = System.getProperty('playerOrganization', "TestOrg")
-    def PLAYER_NICKNAME = System.getProperty('playerNickname', "playerfortest")
-    def PLAYER_PASSWORD = System.getProperty('playerPassword', "Te\$t123")
-    def PLAYER_EMAIL = System.getProperty('playerEmail', "maor@intendu.com")
+    def PLAYER_ORG = System.getProperty('playerOrganization', "intendu")
+    def PLAYER_NICKNAME = System.getProperty('playerUsername', "playerfortest")
+    def PLAYER_PASSWORD = System.getProperty('playerPassword', "\$portVU10")
+    def PLAYER_EMAIL = System.getProperty('playerEmail', "maor+987@intendu.com")
+//    def PLAYER_PASSWORD = System.getProperty('playerPassword', "bXnDdV9H")
+//    def PLAYER_EMAIL = System.getProperty('playerEmail', "maor+22@intendu.com")
 
     ArrayList<Block> blocks = new ArrayList<>()
 
@@ -24,7 +27,7 @@ class MyWorld {
 
     RestMesClient restClient
 
-    def intenduDomain = System.getProperty("intenduDomain", "http://localhost:9000/");
+    def intenduDomain = System.getProperty("intenduDomain", "http://qa-web.intendu.com");
 
     def IntenduWeb intenduWeb = new IntenduWeb(new SeleniumHelper(intenduDomain))
 

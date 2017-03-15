@@ -132,5 +132,5 @@ def getBlocksAmountPerType(ArrayList<Block>  blocks, String blockType) {
 }
 
 Object findBlock(Block originalBlock, ArrayList<Object> blocks)  {
-    return blocks.find { it.sessionID == originalBlock.sessionID && it.isTest == true }
+    return blocks.find { it.sessionID == originalBlock.sessionID } // && it.isTest == true }
 }

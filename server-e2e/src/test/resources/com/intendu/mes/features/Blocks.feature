@@ -1,13 +1,20 @@
 Feature: User Blocks
 
-  @intenduok
+  @intendu
   Scenario: Send one block
     Given I'm logged in player in the system
     And I started a new game session
     When I send one block
     Then block is stored in server
 
-  @intenduok
+  @intendu
+  Scenario: Send one block
+    Given I'm logged in player in the system
+    And I started a new game session
+    When I send one block
+    Then block is stored in server
+
+  @intendu
   Scenario: Send one block using old api
     Given I'm logged in player in the system
     And I started a new game session
